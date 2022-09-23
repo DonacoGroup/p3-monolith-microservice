@@ -35,7 +35,7 @@ jobs:
         context: ./udagram_api_user/
         file: ./Dockerfile
         push: true
-        tags: ${{ secrets.DOCKER_USERNAME }}//udagram-api-user:latest
+        tags: ${{ secrets.DOCKER_USERNAME }}/udagram-api-user:latest
     
     -
       name: Build and push "udagram-api-feed"
@@ -44,7 +44,7 @@ jobs:
         context: ./udagram_api_feed/
         file: ./Dockerfile
         push: true
-        tags: ${{ secrets.DOCKER_USERNAME }}//udagram-api-feed:latest   
+        tags: ${{ secrets.DOCKER_USERNAME }}/udagram-api-feed:latest   
     
     -
       name: Build and push "reverseproxy"
@@ -53,7 +53,7 @@ jobs:
         context: ./udagram_reverseproxy/
         file: ./Dockerfile
         push: true
-        tags: ${{ secrets.DOCKER_USERNAME }}//reverseproxy:latest  
+        tags: ${{ secrets.DOCKER_USERNAME }}/reverseproxy:latest  
     
     -
       name: Build and push "udagram-frontend"
@@ -62,4 +62,4 @@ jobs:
         context: ./udagram_frontend/
         file: ./Dockerfile
         push: true
-        tags: ${{ secrets.DOCKER_USERNAME }}//udagram-frontend:latest
+        tags: ${{ secrets.DOCKER_USERNAME }}/udagram-frontend:latest

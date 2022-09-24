@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
         - name: backend-feed
-          image: segbegnon/udagram-api-feed:v2
+          image: segbegnon/udagram-api-feed:v3
           imagePullPolicy: Always
 #          resources:
 #            requests:

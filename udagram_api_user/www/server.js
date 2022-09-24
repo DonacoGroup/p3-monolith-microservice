@@ -20,9 +20,9 @@ const body_parser_1 = __importDefault(require("body-parser"));
 const config_1 = require("./config/config");
 const model_index_1 = require("./controllers/v0/model.index");
 (() => __awaiter(void 0, void 0, void 0, function* () {
-    yield sequelize_1.sequelize.addModels(model_index_1.V0_FEED_MODELS);
     yield sequelize_1.sequelize.addModels(model_index_1.V0_USER_MODELS);
     console.debug("Initialize database connection...");
+    // @ts-ignore
     yield sequelize_1.sequelize.sync();
     const app = (0, express_1.default)();
     const port = process.env.PORT || 8080;

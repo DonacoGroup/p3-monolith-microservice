@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: env-configmap
+  namespace: default
+data:
+  AWS_BUCKET: udagram-data-s3-679178932061-dev
+  AWS_PROFILE: default
+  AWS_REGION: us-east-1
+  AWS_S3_SIGNED_URL_EXPIRE: '300'
+  POSTGRES_DB: postgres
+  POSTGRES_HOST: udagram-pgdb-rds-679178932061-dev.c2facns2ga73.us-east-1.rds.amazonaws.com
+  URL: http://localhost:8100

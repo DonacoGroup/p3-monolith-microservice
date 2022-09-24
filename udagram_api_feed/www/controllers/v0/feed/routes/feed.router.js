@@ -1,7 +1,11 @@
 "use strict";
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
 }) : (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     o[k2] = m[k];
@@ -14,7 +18,7 @@ var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (
 var __importStar = (this && this.__importStar) || function (mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
     __setModuleDefault(result, mod);
     return result;
 };
@@ -34,7 +38,8 @@ const FeedItem_1 = require("../models/FeedItem");
 const jwt = __importStar(require("jsonwebtoken"));
 const AWS = __importStar(require("../../../../aws"));
 const c = __importStar(require("../../../../config/config"));
-const router = express_1.Router();
+const uuid_1 = require("uuid");
+const router = (0, express_1.Router)();
 function requireAuth(req, res, next) {
     if (!req.headers || !req.headers.authorization) {
         return res.status(401).send({ message: 'No authorization headers.' });
@@ -54,12 +59,15 @@ function requireAuth(req, res, next) {
 exports.requireAuth = requireAuth;
 // Get all feed items
 router.get('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    let pid = (0, uuid_1.v4)();
+    console.log(new Date().toLocaleString() + `: ${pid} - Feed Items requested`);
     const items = yield FeedItem_1.FeedItem.findAndCountAll({ order: [['id', 'DESC']] });
     items.rows.map((item) => {
         if (item.url) {
             item.url = AWS.getGetSignedUrl(item.url);
         }
     });
+    console.log(new Date().toLocaleString() + `: ${pid} - Finished processing Feed Items request`);
     res.send(items);
 }));
 // Get a feed resource

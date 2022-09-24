@@ -4,6 +4,7 @@ import {NextFunction} from 'connect';
 import * as jwt from 'jsonwebtoken';
 import * as AWS from '../../../../aws';
 import * as c from '../../../../config/config';
+import { v4 as uuidv4 } from 'uuid';
 
 const router: Router = Router();
 
@@ -28,12 +29,15 @@ export function requireAuth(req: Request, res: Response, next: NextFunction) {
 
 // Get all feed items
 router.get('/', async (req: Request, res: Response) => {
+  let pid = uuidv4();
+  console.log(new Date().toLocaleString() + `: ${pid} - Feed Items requested`);
   const items = await FeedItem.findAndCountAll({order: [['id', 'DESC']]});
   items.rows.map((item) => {
     if (item.url) {
       item.url = AWS.getGetSignedUrl(item.url);
     }
   });
+  console.log(new Date().toLocaleString() + `: ${pid} - Finished processing Feed Items request`);
   res.send(items);
 });
 

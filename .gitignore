@@ -36,6 +36,14 @@ UserInterfaceState.xcuserstate
 node_modules
 venv/
 .env
+aws-secrets.yaml
+env-secrets.yaml
+env-configmap.yaml
+backend-feed-deployment.yaml
+backend-reverseproxy-deployment.yaml
+backend-user-deployment.yaml
+deployment.yaml
+frontend-deployment.yaml
 # Elastic Beanstalk Files
 .elasticbeanstalk/*
 !.elasticbeanstalk/*.cfg.yml
